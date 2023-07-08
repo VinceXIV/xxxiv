@@ -46,7 +46,7 @@ export default({
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 30rem;
+    width: max(40vw, 40rem);
 }
 
 .form-title {
@@ -80,9 +80,10 @@ form .login {
     padding: 0.3rem;
 }
 
-@media screen and (max-width: 40rem){
+@media screen and (max-width: 50rem){
     .login-page .container {
         width: 80vw;
+        min-width: none;
     }
 }
 </style>
