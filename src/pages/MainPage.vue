@@ -1,7 +1,8 @@
 <template>
     <div class="page main-page">
         <div class="container">
-            <CourseTable :courses="courses" />
+            <CourseTable :courses="courses" :updateCourses="updateCourses"/>
+            <button class="btn" @click="goToPage('register')">Register Course</button>
         </div>
     </div>
 </template>
@@ -17,7 +18,14 @@ export default({
     },
 
     props: {
-        courses: Array
+        courses: Array,
+        updateCourses: Function
+    },
+
+    methods: {
+        goToPage: function(newPage){
+            window.location.href = `/${newPage}`
+        }
     }
 })
 </script>

@@ -2,8 +2,9 @@
     <div class="page register-page">
         <div class="container">
             <h1 class="title">Register Course</h1>
-            <CourseForm />
-            <CourseTable :courses="courses"/>
+            <CourseForm :updateCourses="updateCourses" />
+            <CourseTable :courses="courses" :updateCourses="updateCourses"/>
+            <button class="btn" @click="goToPage('home')">See More Courses</button>
         </div>
     </div>
 </template>
@@ -21,11 +22,20 @@ export default({
     },
 
     props: {
-        courses: Array
+        courses: Array,
+        updateCourses: Function
+    },
+
+    methods: {
+        goToPage: function(newPage){
+            window.location.href = `/${newPage}`
+        }
     }
 })
 </script>
 
 <style scoped>
-
+.register-page .btn {
+    justify-self: left;
+}
 </style>

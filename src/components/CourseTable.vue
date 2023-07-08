@@ -29,7 +29,8 @@ export default ({
     name: 'CourseTable',
 
     props: {
-        courses: Array
+        courses: Array,
+        updateCourses: Function
     }
 })
 </script>

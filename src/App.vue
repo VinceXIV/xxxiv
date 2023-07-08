@@ -1,7 +1,7 @@
 <template>
-    <MainPage v-if="page == 'Main'" :courses="courses"/>
+    <MainPage v-if="page == 'Main'" :courses="courses" :updateCourses="updateCourses"/>
     <LoginPage v-else-if="page == 'Login'" />
-    <RegisterPage v-else-if="page == 'Register'" :courses="courses"/>
+    <RegisterPage v-else-if="page == 'Register'" :courses="courses" :updateCourses="updateCourses"/>
     <PageNotFound v-else />
 </template>
 
@@ -42,6 +42,24 @@ export default({
         return window.addEventListener('popstate', () => {
             this.currentRoute = window.location.pathname
         })
+    },
+
+    methods: {
+        updateCourses: function(targetCourse, method){
+            if(method === 'add'){
+                this.courses.push(targetCourse)
+            }else if (method === 'remove'){
+                this.courses = this.courses.filter(course => course.id !== targetCourse.id)
+            }else if (method === 'update'){
+                this.courses = this.courses.map(course => {
+                    if(course.id === targetCourse.id){
+                        return targetCourse
+                    }else {
+                        return course
+                    }
+                })
+            }
+        }
     }
 })
 </script>

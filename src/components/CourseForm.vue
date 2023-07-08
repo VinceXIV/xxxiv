@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form @submit="handleCourseSubmit">
         <div class="form-item">
             <label for="course-name">Course name</label>
             <input name="course-name" placeholder="Enter course name"/>
@@ -21,7 +21,17 @@
 
 <script>
 export default({
-    name: 'CourseForm'
+    name: 'CourseForm',
+
+    props: {
+        updateCourses: Function
+    },
+
+    methods: {
+        handleCourseSubmit: function(e){
+            e.preventDefault()
+        }
+    }
 })
 </script>
 
