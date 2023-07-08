@@ -44,11 +44,30 @@ export default({
 </script>
 
 <style>
+:root {
+    --outline-bold: solid 0.1rem rgb(212, 212, 212, 1);
+    --outline-faint: solid 0.1rem rgb(212, 212, 212, 0.5);
+    --btn-background-color: #0077be;
+}
+
+.btn {
+    background-color: #0077be;
+    color: white;
+    width: max-content;
+    padding: 0.4rem;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
 * {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: rgba(0, 0, 0, 0.8);
+    color: rgba(0, 0, 0, 0.7);
 
     box-sizing: border-box;
     margin: 0;
