@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page-not-found">
         <h1>Error 404</h1>
         <p>Page not found</p>
     </div>
@@ -12,4 +12,12 @@ export default({
 </script>
 
 <style>
+.page-not-found {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 </style>
