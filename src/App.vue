@@ -1,28 +1,44 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <MainPage v-if="page == 'Main'" />
+    <LoginPage v-else-if="page == 'Login'" />
+    <RegisterPage v-else-if="page == 'Register'" />
+    <PageNotFound v-else />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MainPage from './pages/MainPage.vue';
+import LoginPage from './pages/LoginPage.vue';
+import RegisterPage from './pages/RegisterPage.vue';
+import PageNotFound from './pages/404.vue'
+import routes from './routes';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+export default({
+    name: 'App',
+
+    components: {
+        MainPage,
+        LoginPage,
+        RegisterPage,
+        PageNotFound
+    },
+
+    data() {
+        return {
+            currentRoute: window.location.pathname
+        }
+    },
+
+    computed: {
+        page: function() {
+            console.log('what', routes[this.currentRoute])
+            return routes[this.currentRoute]
+        }
+    },
+
+    mounted: function(){
+        return window.addEventListener('popstate', () => {
+            this.currentRoute = window.location.pathname
+        })
+    }
+})
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
