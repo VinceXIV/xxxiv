@@ -1,5 +1,5 @@
 <template>
-    <MainPage v-if="page == 'Main'" />
+    <MainPage v-if="page == 'Main'" :courses="courses"/>
     <LoginPage v-else-if="page == 'Login'" />
     <RegisterPage v-else-if="page == 'Register'" :courses="courses"/>
     <PageNotFound v-else />
@@ -92,6 +92,8 @@ export default({
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1.5vw;
+    width: max(40vw, 40rem);
 }
 
 .title {
@@ -99,32 +101,22 @@ export default({
     text-align: center;
 }
 
-.page form {
-    padding: 1.2vw;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
+.subtitle {
+    font-size: 1rem;
 }
 
-.page .form-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3vw;
-    width: 100%;
-    justify-content: left;
-}
-
-.form-item input {
-    outline: var(--outline-faint);
-    padding: 0.45vw;
-}
 
 /* RESPONSIVENESS */
 
-@media screen and (max-width: 40rem){
+@media screen and (max-width: 50rem){
+    .page .container {
+        width: 80vw;
+        min-width: none;
+    }
+
     :root {
-        font-size: 2.6vw;
+        font-size: 2.1vw;
     }
 }
+
 </style>

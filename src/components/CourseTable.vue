@@ -2,11 +2,11 @@
     <div class="registered-courses">
         <table >
             <tr class="header">
-                <th>Unique Code</th>
-                <th>Course Name</th>
-                <th>Teacher Name</th>
-                <th>Total of Hours</th>
-                <th>Select</th>
+                <th class="subtitle">Unique Code</th>
+                <th class="subtitle">Course Name</th>
+                <th class="subtitle">Teacher Name</th>
+                <th class="subtitle">Total of Hours</th>
+                <th class="subtitle">Select</th>
             </tr>
 
             <tr class="record" v-for="course in courses" :key="course.id">

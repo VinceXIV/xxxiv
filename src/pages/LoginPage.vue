@@ -33,8 +33,15 @@ export default({
 <style scoped>
 .login-page .container {
     outline: var(--outline-bold);
-    width: max(40vw, 40rem);
     margin-bottom: 4rem;
+}
+
+form {
+    padding: 1.2vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
 }
 
 form .login {
@@ -42,10 +49,16 @@ form .login {
     margin-bottom: 0.5rem;
 }
 
-@media screen and (max-width: 50rem){
-    .login-page .container {
-        width: 80vw;
-        min-width: none;
-    }
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vw;
+    width: 100%;
+    justify-content: left;
+}
+
+.form-item input {
+    outline: var(--outline-faint);
+    padding: 0.45vw;
 }
 </style>

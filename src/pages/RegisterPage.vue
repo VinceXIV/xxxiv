@@ -27,16 +27,5 @@ export default({
 </script>
 
 <style scoped>
-.register-page .container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5vw;
-}
 
-@media screen and (max-width: 50rem){
-    .register-page .container {
-        width: 80vw;
-        min-width: none;
-    }
-}
 </style>

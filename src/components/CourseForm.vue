@@ -24,3 +24,26 @@ export default({
     name: 'CourseForm'
 })
 </script>
+
+<style scoped>
+form {
+    padding: 1.2vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vw;
+    width: 100%;
+    justify-content: left;
+}
+
+.form-item input {
+    outline: var(--outline-faint);
+    padding: 0.45vw;
+}
+</style>
