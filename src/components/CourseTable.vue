@@ -1,5 +1,7 @@
 <template>
     <div class="registered-courses">
+        <h1 class="title">Available Courses</h1>
+
         <table >
             <tr class="header">
                 <th class="subtitle">Unique Code</th>
@@ -36,6 +38,9 @@ export default ({
 .registered-courses {
     width: 100%;
     padding: 1.2vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .registered-courses table {
