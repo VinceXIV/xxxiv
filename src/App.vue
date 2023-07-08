@@ -50,6 +50,18 @@ export default({
     --btn-background-color: #0077be;
 }
 
+* {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: rgba(0, 0, 0, 0.7);
+
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+}
+
+/* STYLE CHILD COMPONENTS */
 .btn {
     background-color: #0077be;
     color: white;
@@ -63,16 +75,50 @@ export default({
     opacity: 0.8;
 }
 
-* {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: rgba(0, 0, 0, 0.7);
-
-    box-sizing: border-box;
-    margin: 0;
-    border: 0;
+.page {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
 }
+
+.container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.page form {
+    padding: 0.8rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 4rem;
+}
+
+.page .form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    width: 100%;
+    justify-content: left;
+}
+
+.form-item input {
+    outline: var(--outline-faint);
+    padding: 0.3rem;
+}
+
+/* RESPONSIVENESS */
 
 @media screen and (max-width: 40rem){
     :root {

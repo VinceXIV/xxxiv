@@ -1,7 +1,7 @@
 <template>
-    <div class="login-page">
+    <div class="page login-page">
         <div class="container">
-            <h1 class="form-title">
+            <h1 class="title">
                 College Registration Course
             </h1>
 
@@ -31,57 +31,14 @@ export default({
 </script>
 
 <style scoped>
-.login-page {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    place-items: center;
-}
-
 .login-page .container {
     outline: var(--outline-bold);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: max(40vw, 40rem);
-}
-
-form {
-    margin-bottom: 4rem;
-}
-
-.form-title {
-    font-size: 1.3rem;
-    text-align: center;
-}
-
-.login-page form {
-    padding: 0.8rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
 }
 
 form .login {
     font-size: 1rem;
     margin-bottom: 0.5rem;
-}
-
-.form-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    width: 100%;
-    justify-content: left;
-}
-
-.form-item input {
-    outline: var(--outline-faint);
-    padding: 0.3rem;
 }
 
 @media screen and (max-width: 50rem){
