@@ -66,7 +66,7 @@ export default({
     background-color: #0077be;
     color: white;
     width: max-content;
-    padding: 0.4rem;
+    padding: 0.6vw;
     border-radius: 0.3em;
     cursor: pointer;
 }
@@ -83,8 +83,8 @@ export default({
 }
 
 .container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -97,7 +97,7 @@ export default({
 }
 
 .page form {
-    padding: 0.8rem;
+    padding: 1.2vw;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -108,14 +108,14 @@ export default({
 .page .form-item {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.3vw;
     width: 100%;
     justify-content: left;
 }
 
 .form-item input {
     outline: var(--outline-faint);
-    padding: 0.3rem;
+    padding: 0.45vw;
 }
 
 /* RESPONSIVENESS */
