@@ -42,3 +42,22 @@ export default({
     }
 })
 </script>
+
+<style>
+* {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: rgba(0, 0, 0, 0.8);
+
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+}
+
+@media screen and (max-width: 40rem){
+    :root {
+        font-size: 2.6vw;
+    }
+}
+</style>
