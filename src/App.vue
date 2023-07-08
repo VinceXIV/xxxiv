@@ -1,7 +1,7 @@
 <template>
     <MainPage v-if="page == 'Main'" />
     <LoginPage v-else-if="page == 'Login'" />
-    <RegisterPage v-else-if="page == 'Register'" />
+    <RegisterPage v-else-if="page == 'Register'" :courses="courses"/>
     <PageNotFound v-else />
 </template>
 
@@ -11,6 +11,8 @@ import LoginPage from './pages/LoginPage.vue';
 import RegisterPage from './pages/RegisterPage.vue';
 import PageNotFound from './pages/404.vue'
 import routes from './routes';
+import { courses } from './data/data'
+
 
 export default({
     name: 'App',
@@ -24,6 +26,7 @@ export default({
 
     data() {
         return {
+            courses: courses,
             currentRoute: window.location.pathname
         }
     },
@@ -102,7 +105,6 @@ export default({
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
-    margin-bottom: 4rem;
 }
 
 .page .form-item {

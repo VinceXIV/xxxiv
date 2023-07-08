@@ -34,6 +34,7 @@ export default({
 .login-page .container {
     outline: var(--outline-bold);
     width: max(40vw, 40rem);
+    margin-bottom: 4rem;
 }
 
 form .login {
