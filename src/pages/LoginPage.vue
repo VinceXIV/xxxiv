@@ -49,6 +49,10 @@ export default({
     width: max(40vw, 40rem);
 }
 
+form {
+    margin-bottom: 4rem;
+}
+
 .form-title {
     font-size: 1.3rem;
     text-align: center;
