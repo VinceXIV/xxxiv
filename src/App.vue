@@ -1,35 +1,19 @@
 <template>
-    <MainPage v-if="page == 'Main'" :courses="courses" :updateCourses="updateCourses"/>
-    <RegisterPage v-else-if="page == 'Register'" :courses="courses" :updateCourses="updateCourses"/>
-
-    <LoginPage v-else-if="page == 'Login'"
+    <router-view
         :online="online"
         :token="token"
-        :updateRoute="updateRoute"
+        :courses="courses"
+        :updateCourses="updateCourses"
         :setUserLoggedIn="setUserLoggedIn"
-    />
-
-    <PageNotFound v-else />
+    ></router-view>
 </template>
 
 <script>
-import MainPage from './pages/MainPage.vue';
-import LoginPage from './pages/LoginPage.vue';
-import RegisterPage from './pages/RegisterPage.vue';
-import PageNotFound from './pages/404.vue'
-import routes from './routes';
 import { apiHost } from './data/variables';
 
 
 export default({
     name: 'App',
-
-    components: {
-        MainPage,
-        LoginPage,
-        RegisterPage,
-        PageNotFound
-    },
 
     data() {
         return {
@@ -40,15 +24,9 @@ export default({
         }
     },
 
-    computed: {
-        page: function() {
-            return routes[this.currentRoute]
-        }
-    },
-
     mounted: function(){
         window.addEventListener('popstate', () => {
-             this.updateRoute(window.location.pathname)
+            this.$router.push(window.location.url)
         })
 
         window.addEventListener('online', () => {
@@ -77,12 +55,6 @@ export default({
             }
         },
 
-        updateRoute(newRoute){
-            console.log(newRoute)
-            // window.location.pathname = newRoute
-            // this.currentRoute = newRoute
-        },
-
         setUserLoggedIn: async function(token){
             this.token = token
 
@@ -99,6 +71,8 @@ export default({
                 this.courses = courses
                 this.updateRoute('/main')
                 localStorage.setItem('data', JSON.stringify({token: token, courses: courses}));
+
+                console.log(courses)
             }else {
                 res.json().then(error => console.warn(error))
             }

@@ -52,7 +52,7 @@ export default({
 
     created: function(){
         if(this.token){
-            this.updateRoute('/main')
+            this.$router.push('/home')
         }
     },
 
@@ -69,6 +69,7 @@ export default({
             }).then(res => {
                 if(res.ok){
                     res.json().then(data =>{
+                        this.$router.push('/home')
                         this.setUserLoggedIn(data.token)
                     })
                 }else{

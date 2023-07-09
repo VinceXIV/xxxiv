@@ -1,12 +1,21 @@
 import Vue from 'vue'
-import App from './App.vue'
+import VueRouter from 'vue-router'
+import App from './App'
+import routes from './routes'
 
-Vue.config.productionTip = false
+
+Vue.use(VueRouter)
+
+const router = new VueRouter({
+  mode: 'history',
+  routes: routes
+})
+
 
 const app = new Vue({
+  router: router,
   render: h => h(App),
-}).$mount('#app')
-
-window.addEventListener('popstate', () => {
-  app.currentRoute = window.location.pathname
 })
+
+
+app.$mount('#app')
