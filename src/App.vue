@@ -1,7 +1,14 @@
 <template>
     <MainPage v-if="page == 'Main'" :courses="courses" :updateCourses="updateCourses"/>
-    <LoginPage v-else-if="page == 'Login'" />
     <RegisterPage v-else-if="page == 'Register'" :courses="courses" :updateCourses="updateCourses"/>
+
+    <LoginPage v-else-if="page == 'Login'"
+        :online="online"
+        :token="token"
+        :updateRoute="updateRoute"
+        :setUserLoggedIn="setUserLoggedIn"
+    />
+
     <PageNotFound v-else />
 </template>
 
@@ -11,7 +18,8 @@ import LoginPage from './pages/LoginPage.vue';
 import RegisterPage from './pages/RegisterPage.vue';
 import PageNotFound from './pages/404.vue'
 import routes from './routes';
-import { courses } from './data/data'
+// import { courses } from './data/data'
+import { apiHost } from './data/variables';
 
 
 export default({
@@ -26,21 +34,30 @@ export default({
 
     data() {
         return {
-            courses: courses,
-            currentRoute: window.location.pathname
+            courses: [],
+            currentRoute: window.location.pathname,
+            online: navigator.onLine,
+            token: this.getToken() // If the token exists, we will consider the person as logged in
         }
     },
 
     computed: {
         page: function() {
-            console.log('what', routes[this.currentRoute])
             return routes[this.currentRoute]
         }
     },
 
     mounted: function(){
-        return window.addEventListener('popstate', () => {
-            this.currentRoute = window.location.pathname
+        window.addEventListener('popstate', () => {
+             this.updateRoute(window.location.pathname)
+        })
+
+        window.addEventListener('online', () => {
+            this.online = true
+        })
+
+        window.addEventListener('offline', () => {
+            this.online = false
         })
     },
 
@@ -58,6 +75,45 @@ export default({
                         return course
                     }
                 })
+            }
+        },
+
+        updateRoute(newRoute){
+            window.location.pathname = newRoute
+            // this.currentRoute = newRoute
+        },
+
+        setUserLoggedIn: async function(token){
+            this.token = token
+            console.log('what')
+
+            const res = await fetch(`${apiHost}/courses`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+
+            if(res.ok){
+                const courses = await res.json().then(data => data)
+
+                this.courses = courses
+                this.updateRoute('/main')
+                localStorage.setItem('data', JSON.stringify({token: token, courses: courses}));
+
+                console.log("courses: ", courses)
+            }else {
+                res.json().then(error => console.warn(error))
+            }
+        },
+
+        getToken: function(){
+            const data = localStorage.getItem('data')
+
+            if(data){
+                return JSON.parse(data)['token']
+            }else {
+                return null
             }
         }
     }

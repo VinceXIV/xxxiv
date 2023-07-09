@@ -14,8 +14,8 @@
             <tr class="record" v-for="course in courses" :key="course.id">
                 <td>{{ course.id }}</td>
                 <td>{{ course.course_name }}</td>
-                <td>{{ course.teacher_name }}</td>
-                <td>{{ course.total_hours }}</td>
+                <td>{{ course.course_teacher_name }}</td>
+                <td>{{ course.course_total_hours }}</td>
                 <td>
                     <button class="btn">Select</button>
                 </td>
@@ -25,12 +25,18 @@
 </template>
 
 <script>
+import { courses } from '@/data/data';
+
 export default ({
     name: 'CourseTable',
 
     props: {
         courses: Array,
         updateCourses: Function
+    },
+
+    mounted: function(){
+        console.log("these are the courses: ", courses)
     }
 })
 </script>

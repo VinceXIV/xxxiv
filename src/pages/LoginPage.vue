@@ -5,17 +5,23 @@
                 College Registration Course
             </h1>
 
-            <form>
+            <form action="" @submit="handleLoginSubmit">
                 <h2 class="login">Login</h2>
 
                 <div class="form-item">
-                    <label for="email-address">Email address</label>
-                    <input name="email-address" placeholder="email address"/>
+                    <label for="email">Email address</label>
+                    <input name="email"
+                        placeholder="email address"
+                        v-model="email"
+                    />
                 </div>
     
                 <div class="form-item">
                     <label for="password">Password</label>
-                    <input name="password" placeholder="password" />
+                    <input name="password"
+                        placeholder="password"
+                        v-model="password"
+                    />
                 </div>
     
                 <input class="btn" type="submit" value="enter system">
@@ -25,8 +31,55 @@
 </template>
 
 <script>
+import {apiHost} from "../data/variables"
+
+
 export default({
-    name: 'LoginPage'
+    name: 'LoginPage',
+
+    props: {
+        setUserLoggedIn: Function,
+        updateRoute: Function,
+        token: String // If token exists, the user is already logged in. We will be redirecting to main page
+    },
+
+    data(){
+        return {
+            email: "",
+            password: ""
+        }
+    },
+
+    created: function(){
+        if(this.token){
+            this.updateRoute('/main')
+        }
+    },
+
+    methods: {
+        handleLoginSubmit: function(e){
+            e.preventDefault()
+            fetch(`${apiHost}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'text/plain'
+                },
+                body: JSON.stringify({email: this.email, password: this.password})
+            }).then(res => {
+                if(res.ok){
+                    res.json().then(data =>{
+                        this.setUserLoggedIn(data.token)
+                    })
+                }else{
+                    res.json().then(error => {
+                        console.warn(error)
+                    })
+                }
+            })
+
+        }
+    }
 })
 </script>
 
