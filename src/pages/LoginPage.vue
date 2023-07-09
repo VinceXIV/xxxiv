@@ -31,16 +31,14 @@
 </template>
 
 <script>
-import {apiHost} from "../data/variables"
-
 
 export default({
     name: 'LoginPage',
 
     props: {
-        setUserLoggedIn: Function,
-        updateRoute: Function,
-        token: String // If token exists, the user is already logged in. We will be redirecting to main page
+        login: Function,
+        loggedIn: Boolean,
+        navigate: Function
     },
 
     data(){
@@ -51,34 +49,15 @@ export default({
     },
 
     created: function(){
-        if(this.token){
-            this.$router.push('/home')
+        if(this.loggedIn){
+            this.navigate('/home')
         }
     },
 
     methods: {
         handleLoginSubmit: function(e){
             e.preventDefault()
-            fetch(`${apiHost}/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'text/plain'
-                },
-                body: JSON.stringify({email: this.email, password: this.password})
-            }).then(res => {
-                if(res.ok){
-                    res.json().then(data =>{
-                        this.$router.push('/home')
-                        this.setUserLoggedIn(data.token)
-                    })
-                }else{
-                    res.json().then(error => {
-                        console.warn(error)
-                    })
-                }
-            })
-
+            this.login(this.email, this.password)
         }
     }
 })

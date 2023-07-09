@@ -1,26 +1,42 @@
 <template>
-    <router-view
-        :online="online"
-        :token="token"
-        :courses="courses"
-        :updateCourses="updateCourses"
-        :setUserLoggedIn="setUserLoggedIn"
-    ></router-view>
+    <div>
+        <NavBar :logout="logout" :loggedIn="loggedIn" :navigate="navigate"/>
+
+        <router-view
+            :online="online"
+            :login="login"
+            :loggedIn="loggedIn"
+            :courses="courses"
+            :updateCourses="updateCourses"
+            :navigate="navigate"
+        ></router-view>
+    </div>
 </template>
 
 <script>
+import NavBar from './components/NavBar.vue';
 import { apiHost } from './data/variables';
 
 
 export default({
     name: 'App',
 
+    components: {
+        NavBar
+    },
+
     data() {
         return {
-            courses: [],
+            courses: this.getCourses(),
             currentRoute: window.location.pathname,
             online: navigator.onLine,
-            token: this.getToken() // If the token exists, we will consider the person as logged in
+            token: this.getToken()
+        }
+    },
+
+    computed: {
+        loggedIn: function(){
+            return !!this.token
         }
     },
 
@@ -39,6 +55,49 @@ export default({
     },
 
     methods: {
+        logout: function(){
+            this.token = null
+            this.courses = []
+            localStorage.clear()
+
+            this.$router.push('/login')
+        },
+
+        login: function(email, password){
+            fetch(`${apiHost}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'text/plain'
+                },
+                body: JSON.stringify({email: email, password: password})
+            }).then(res => {
+                if(res.ok){
+                    res.json().then(data =>{
+                        this.$router.push('/home')
+
+                        this.token = data.token
+                        this.updateLocalStorage({token: data.token})
+
+                        this.loadCourses(data.token)
+                    })
+                }else{
+                    res.json().then(error => {
+                        console.warn(error)
+                    })
+                }
+            })           
+        },
+
+        navigate: function(path){
+            // path expected is in the form: '/home', '/login', etc
+
+            // If we are currently not in the log in page
+            if(this.$router.history.current.path !== path){
+                this.$router.push(path)
+            }           
+        },
+
         updateCourses: function(targetCourse, method){
             if(method === 'add'){
                 this.courses.push(targetCourse)
@@ -55,9 +114,7 @@ export default({
             }
         },
 
-        setUserLoggedIn: async function(token){
-            this.token = token
-
+        loadCourses: async function(token){
             const res = await fetch(`${apiHost}/courses`, {
                     method: 'GET',
                     headers: {
@@ -66,16 +123,19 @@ export default({
                 })
 
             if(res.ok){
-                const courses = await res.json().then(data => data)
+                this.navigate('/main')
+                this.courses = await res.json().then(data => data)
 
-                this.courses = courses
-                this.updateRoute('/main')
-                localStorage.setItem('data', JSON.stringify({token: token, courses: courses}));
-
-                console.log(courses)
+                this.updateLocalStorage({courses: this.courses})
             }else {
                 res.json().then(error => console.warn(error))
             }
+        },
+
+        updateLocalStorage: function(keyValue){
+            const currentData = JSON.parse(localStorage.getItem('data') || null) || {}
+
+            localStorage.setItem('data', JSON.stringify({...currentData, ...keyValue}))
         },
 
         getToken: function(){
@@ -85,6 +145,16 @@ export default({
                 return JSON.parse(data)['token']
             }else {
                 return null
+            }
+        },
+
+        getCourses: function(){
+            const data = localStorage.getItem('data')
+
+            if(data){
+                return JSON.parse(data)['courses']
+            }else {
+                return []
             }
         }
     }
@@ -107,6 +177,8 @@ export default({
     box-sizing: border-box;
     margin: 0;
     border: 0;
+
+    /* outline: solid 0.1rem red; */
 }
 
 /* STYLE CHILD COMPONENTS */
@@ -125,7 +197,7 @@ export default({
 
 .page {
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     display: grid;
     place-items: center;
 }

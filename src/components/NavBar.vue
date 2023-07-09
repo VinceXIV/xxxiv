@@ -3,7 +3,7 @@
         <div class="container">
             <h1>Code Challenge</h1>
             <button class="btn" @click="changeLoginState">
-                {{ token? 'Logout' : 'Login' }}
+                {{ loggedIn ? 'Logout' : 'Login' }}
             </button>
         </div>
     </nav>
@@ -14,9 +14,9 @@ export default({
     name: "NavBar",
 
     props: {
-        login: Function,
         logout: Function,
-        loggedIn: Boolean
+        loggedIn: Boolean,
+        navigate: Function
     },
 
     methods: {
@@ -24,7 +24,7 @@ export default({
             if(this.loggedIn){
                 this.logout()
             }else {
-                this.login()
+                this.navigate('/main')
             }
         }
     }

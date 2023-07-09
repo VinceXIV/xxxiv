@@ -4,7 +4,7 @@
             <h1 class="title">Register Course</h1>
             <CourseForm :updateCourses="updateCourses" />
             <CourseTable :courses="courses" :updateCourses="updateCourses"/>
-            <button class="btn" @click="goToPage('home')">See More Courses</button>
+            <button class="btn" @click="navigate('/home')">See More Courses</button>
         </div>
     </div>
 </template>
@@ -23,12 +23,14 @@ export default({
 
     props: {
         courses: Array,
-        updateCourses: Function
+        updateCourses: Function,
+        loggedIn: Boolean,
+        navigate: Function
     },
 
-    methods: {
-        goToPage: function(newPage){
-            console.log(newPage)
+    created: function(){
+        if(!this.loggedIn){
+            this.navigate('/login')
         }
     }
 })

@@ -1,8 +1,8 @@
 <template>
     <div class="page main-page">
         <div class="container">
-            <CourseTable :courses="courses" :updateCourses="updateCourses"/>
-            <button class="btn" @click="goToPage('register')">Register Course</button>
+            <CourseTable :courses="courses" :updateCourses="updateCourses" :navigate="navigate"/>
+            <button class="btn" @click="navigate('/register')">Register Course</button>
         </div>
     </div>
 </template>
@@ -19,14 +19,16 @@ export default({
 
     props: {
         courses: Array,
-        updateCourses: Function
+        updateCourses: Function,
+        loggedIn: Boolean,
+        navigate: Function
     },
 
-    methods: {
-        goToPage: function(newPage){
-            console.log(newPage)
+    created: function(){
+        if(!this.loggedIn){
+            this.navigate('/login')
         }
-    }
+    },
 })
 </script>
 
