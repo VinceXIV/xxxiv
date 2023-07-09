@@ -4,7 +4,7 @@
             <h1 class="title">Register Course</h1>
             <CourseForm :updateCourses="updateCourses" />
             <CourseTable :courses="courses" :updateCourses="updateCourses"/>
-            <button class="btn" @click="navigate('/home')">See More Courses</button>
+            <button class="btn" @click="navigate('/main')">See More Courses</button>
         </div>
     </div>
 </template>

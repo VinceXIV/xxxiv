@@ -27,10 +27,10 @@ export default({
 
     data() {
         return {
-            courses: this.getCourses(),
+            courses: this.getFromLocalStorage('courses', []),
             currentRoute: window.location.pathname,
             online: navigator.onLine,
-            token: this.getToken()
+            token: this.getFromLocalStorage('token', '')
         }
     },
 
@@ -76,8 +76,7 @@ export default({
                     res.json().then(data =>{
                         this.$router.push('/home')
 
-                        this.token = data.token
-                        this.updateLocalStorage({token: data.token})
+                        this.updateLocalStorage('token', data.token)
 
                         this.loadCourses(data.token)
                     })
@@ -123,38 +122,27 @@ export default({
                 })
 
             if(res.ok){
+                const courses = await res.json().then(data => data)
+                this.updateLocalStorage('courses', courses)
                 this.navigate('/main')
-                this.courses = await res.json().then(data => data)
-
-                this.updateLocalStorage({courses: this.courses})
             }else {
                 res.json().then(error => console.warn(error))
             }
         },
 
-        updateLocalStorage: function(keyValue){
+        updateLocalStorage: function(key, value){
+            this[key] = value
             const currentData = JSON.parse(localStorage.getItem('data') || null) || {}
-
-            localStorage.setItem('data', JSON.stringify({...currentData, ...keyValue}))
+            localStorage.setItem('data', JSON.stringify({...currentData, [key]: value}))
         },
 
-        getToken: function(){
-            const data = localStorage.getItem('data')
+        getFromLocalStorage: function(key, defaultVal){
+            const data = localStorage.getItem('data') || null
 
             if(data){
-                return JSON.parse(data)['token']
+                return JSON.parse(data)[key]
             }else {
-                return null
-            }
-        },
-
-        getCourses: function(){
-            const data = localStorage.getItem('data')
-
-            if(data){
-                return JSON.parse(data)['courses']
-            }else {
-                return []
+                return defaultVal
             }
         }
     }

@@ -50,7 +50,7 @@ export default({
 
     created: function(){
         if(this.loggedIn){
-            this.navigate('/home')
+            this.navigate('/main')
         }
     },
 
