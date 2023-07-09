@@ -18,7 +18,6 @@ import LoginPage from './pages/LoginPage.vue';
 import RegisterPage from './pages/RegisterPage.vue';
 import PageNotFound from './pages/404.vue'
 import routes from './routes';
-// import { courses } from './data/data'
 import { apiHost } from './data/variables';
 
 
@@ -79,13 +78,13 @@ export default({
         },
 
         updateRoute(newRoute){
-            window.location.pathname = newRoute
+            console.log(newRoute)
+            // window.location.pathname = newRoute
             // this.currentRoute = newRoute
         },
 
         setUserLoggedIn: async function(token){
             this.token = token
-            console.log('what')
 
             const res = await fetch(`${apiHost}/courses`, {
                     method: 'GET',
@@ -100,8 +99,6 @@ export default({
                 this.courses = courses
                 this.updateRoute('/main')
                 localStorage.setItem('data', JSON.stringify({token: token, courses: courses}));
-
-                console.log("courses: ", courses)
             }else {
                 res.json().then(error => console.warn(error))
             }

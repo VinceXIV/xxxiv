@@ -28,7 +28,7 @@ export default({
 
     methods: {
         goToPage: function(newPage){
-            window.location.href = `/${newPage}`
+            console.log(newPage)
         }
     }
 })
