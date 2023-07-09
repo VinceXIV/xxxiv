@@ -25,18 +25,31 @@
 </template>
 
 <script>
-import { courses } from '@/data/data';
 
 export default ({
     name: 'CourseTable',
 
     props: {
-        courses: Array,
+        // courses: Array,
         updateCourses: Function
     },
 
-    mounted: function(){
-        console.log("these are the courses: ", courses)
+    data(){
+        return {
+            courses: this.getCourses()
+        }
+    },
+
+    methods: {
+        getCourses: function(){
+            const data = localStorage.getItem('data')
+
+            if(data){
+                return JSON.parse(data)['courses']
+            }else {
+                return null
+            }
+        }
     }
 })
 </script>
