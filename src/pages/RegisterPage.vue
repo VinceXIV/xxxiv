@@ -2,7 +2,7 @@
     <div class="page register-page">
         <div class="container">
             <h1 class="title">Register Course</h1>
-            <CourseForm :handleFormSubmit="registerCourse"/>
+            <CourseForm :handleFormBtnClick="registerCourse" :buttons="buttons"/>
         </div>
     </div>
 </template>
@@ -21,6 +21,14 @@ export default({
         loggedIn: Boolean,
         navigate: Function,
         registerCourse: Function
+    },
+
+    data(){
+        return {
+            buttons: [
+                {id: 1, action: 'Register', display: ''}
+            ]
+        }
     },
 
     created: function(){

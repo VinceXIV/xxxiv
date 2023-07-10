@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleBtnClick">
         <div class="form-item">
             <label for="course-name">Course name</label>
             <input name="course-name" v-model="formData.course_name" placeholder="Enter course name"/>
@@ -15,7 +15,14 @@
             <input name="hours" v-model="formData.course_total_hours" placeholder="Enter number of hours"/>
         </div>
 
-        <input class="btn" type="submit" value="Register">
+        <div class="form-btns">
+            <button v-for="btn in buttons" :key="`btn-${btn.id}`"
+                class="btn"
+                :class="btn.visibility"
+                @click="(e)=>handleBtnClick(btn.action, e)">
+                {{ btn.action }}
+            </button>
+        </div>
     </form>
 </template>
 
@@ -24,8 +31,9 @@ export default({
     name: 'CourseForm',
 
     props: {
-        handleFormSubmit: Function,
-        initialFormData: Object
+        handleFormBtnClick: Function,
+        initialFormData: Object,
+        buttons: Array
     },
 
     data(){
@@ -40,8 +48,10 @@ export default({
     },
 
     methods: {
-        handleSubmit: function(){
-            this.handleFormSubmit(this.formData)
+        handleBtnClick: function(action, e){
+            e.preventDefault()
+
+            this.handleFormBtnClick(this.formData, action)
 
             this.formData = {
                 course_name: '',
@@ -73,5 +83,16 @@ form {
 .form-item input {
     outline: var(--outline-faint);
     padding: 0.45vw;
+}
+
+.form-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.btn.hidden {
+    visibility: hidden;
+    background-color: brown;
 }
 </style>

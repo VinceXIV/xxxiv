@@ -3,6 +3,7 @@
         <div class="container">
             <h1 v-if="activeCourseEditState" class="title">Edit Course</h1>
             <CourseForm v-if="activeCourseEditState"
+                :buttons="buttons"
                 class="form-modal"
                 :initialFormData="activeCourse"
                 :key="`edit-course${activeCourse.id}`"/>
@@ -36,7 +37,13 @@ export default({
     data(){
         return {
             activeCourseEditState: false,
-            activeCourse: {}
+            activeCourse: {},
+            buttons: [
+                {id: 1, action: 'Register', visibility: 'hidden'},
+                {id: 2, action: 'Edit', visibility: ''},
+                {id: 3, action: 'Remote', visibility: ''},
+                {id: 4, action: 'Cancel', visibility: ''},
+            ]
         }
     },
 
