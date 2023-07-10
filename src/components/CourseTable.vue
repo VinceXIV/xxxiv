@@ -2,7 +2,7 @@
     <div class="registered-courses">
         <h1 class="title">Available Courses</h1>
 
-        <table >
+        <table ref="courseTable">
             <tr class="header">
                 <th class="subtitle">Unique Code</th>
                 <th class="subtitle">Course Name</th>
@@ -11,7 +11,11 @@
                 <th class="subtitle">Select</th>
             </tr>
 
-            <tr class="record" v-for="course in courses" :key="course.id">
+            <tr :id="`record-${course.id}`"
+                class="record"
+                v-for="course in courses"
+                :key="course.id" @click="makeActive(course)">
+
                 <td>{{ course.id }}</td>
                 <td>{{ course.course_name }}</td>
                 <td>{{ course.course_teacher_name }}</td>
@@ -40,6 +44,22 @@ export default ({
         courses: Array,
         updateCourses: Function,
         handleCourseTableBtnClick: Function
+    },
+
+    data(){
+        return {
+            activeCourse: null
+        }
+    },
+
+    methods: {
+        makeActive: function(course){
+            const allRecords = this.$refs.courseTable.querySelectorAll('.record')
+            allRecords.forEach(record => record.classList.remove('active'))
+            
+            this.activeCourse = course
+            this.$refs.courseTable.querySelector(`#record-${course.id}`)?.classList.add('active')
+        }
     }
 })
 </script>
@@ -74,6 +94,10 @@ th, td {
 .record .btn {
     width: 5rem;
     min-width: max-content;
+}
+
+.record.active {
+    background-color: #d4d4d4;
 }
 
 td {
