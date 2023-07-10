@@ -372,7 +372,7 @@ ul li {
     }
 
     :root {
-        font-size: 2.1vw;
+        font-size: clamp(10px, 2.1vw, 25px);
     }
 }
 

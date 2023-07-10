@@ -27,8 +27,8 @@ export default({
     data(){
         return {
             buttons: [
-                {id: 1, action: 'Register', display: ''},
-                {id: 2, action: 'View Registered Courses', display: ''}
+                {id: 1, name: 'register', action: 'Register', display: ''},
+                {id: 2, name: 'View Registered Courses', action: 'go-to-main', display: ''}
             ]
         }
     },
@@ -37,7 +37,7 @@ export default({
         handleClick: function(course, action, e){
             e.preventDefault()
 
-            if(action === 'View Registered Courses'){
+            if(action === 'go-to-home'){
                 this.navigate('/main')
             }else{
                 this.handleFormBtnClick(course, action, e)

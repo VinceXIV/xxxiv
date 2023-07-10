@@ -77,7 +77,7 @@ export default({
 <style scoped>
 form {
     padding: 1.2vw;
-    width: 100%;
+    width: min(100%, 80vw);
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
@@ -108,7 +108,7 @@ form {
 }
 
 .form-message {
-    height: 3vw;
+    height: 1.5vw;
 }
 .form-message p{
     color: green;
