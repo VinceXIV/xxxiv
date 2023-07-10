@@ -15,7 +15,7 @@
             <input name="hours" v-model="formData.course_total_hours" placeholder="Enter number of hours"/>
         </div>
 
-        <input class="btn" type="submit" value="enter system">
+        <input class="btn" type="submit" value="Register">
     </form>
 </template>
 
@@ -24,16 +24,18 @@ export default({
     name: 'CourseForm',
 
     props: {
-        handleFormSubmit: Function
+        handleFormSubmit: Function,
+        initialFormData: Object
     },
 
     data(){
         return {
-            formData: {
-                course_name: '',
-                course_teacher_name: '',
-                course_total_hours: ''
-            }
+            formData: this.initialFormData || 
+                {
+                    course_name: '',
+                    course_teacher_name: '',
+                    course_total_hours: ''
+                }
         }
     },
 

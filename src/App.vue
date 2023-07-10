@@ -15,6 +15,7 @@
             :updateCourses="updateCourses"
             :navigate="navigate"
             :registerCourse="registerCourse"
+            :editCourse="editCourse"
         ></router-view>
     </div>
 </template>
@@ -112,6 +113,25 @@ export default({
         registerCourse: async function(formData){
             const res = await fetch(`${apiHost}/courses`, {
                     method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${this.getFromLocalStorage('token')}`
+                    },
+                    body: JSON.stringify(formData)
+                })
+
+            if(res.ok){
+                const newCourse = await res.json().then(data => data)
+                this.updateCourses(newCourse, 'add')
+            }else{
+                res.json().then(error => console.warn(error))
+            }
+        },
+
+        editCourse: async function(formData){
+            const res = await fetch(`${apiHost}/courses`, {
+                    method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',

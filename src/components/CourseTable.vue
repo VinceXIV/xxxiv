@@ -17,8 +17,14 @@
                 <td>{{ course.course_teacher_name }}</td>
                 <td>{{ course.course_total_hours }}</td>
                 <td class="buttons">
-                    <button class="btn">Edit</button>
-                    <button class="btn">Delete</button>
+                    <button class="btn"
+                        @click="(e)=>handleCourseTableBtnClick(course, 'edit', e)">
+                        Edit
+                    </button>
+                    <button class="btn"
+                        @click="(e)=>handleCourseTableBtnClick(course, 'delete', e)">
+                        Delete
+                    </button>
                 </td>
             </tr>
         </table>
@@ -32,7 +38,8 @@ export default ({
 
     props: {
         courses: Array,
-        updateCourses: Function
+        updateCourses: Function,
+        handleCourseTableBtnClick: Function
     }
 })
 </script>

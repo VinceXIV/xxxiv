@@ -1,7 +1,12 @@
 <template>
-    <div class="page main-page">
+    <div class="page main-page">        
         <div class="container">
-            <CourseTable :courses="courses" :updateCourses="updateCourses" :navigate="navigate"/>
+            <h1 v-if="activeCourseEditState" class="title">Edit Course</h1>
+            <CourseForm v-if="activeCourseEditState"
+                class="form-modal"
+                :initialFormData="activeCourse"
+                :key="`edit-course${activeCourse.id}`"/>
+            <CourseTable :courses="courses" :handleCourseTableBtnClick="handleCourseTableBtnClick"/>
             <button class="btn register-btn" @click="navigate('/register')">Register A New Course</button>
         </div>
     </div>
@@ -9,19 +14,30 @@
 
 <script>
 import CourseTable from '@/components/CourseTable.vue';
+import CourseForm from '@/components/CourseForm.vue';
 
 export default({
     name: 'MainPage',
 
     components: {
-        CourseTable
+        CourseTable,
+        CourseForm
     },
 
     props: {
         courses: Array,
         updateCourses: Function,
         loggedIn: Boolean,
-        navigate: Function
+        navigate: Function,
+        editCourse: Function,
+        deleteCourse: Function
+    },
+
+    data(){
+        return {
+            activeCourseEditState: false,
+            activeCourse: {}
+        }
     },
 
     created: function(){
@@ -29,13 +45,21 @@ export default({
             this.navigate('/login')
         }
     },
+
+    methods: {
+        handleCourseTableBtnClick: function(course, action){
+            if(action === 'edit'){
+                this.activeCourse = course
+                this.activeCourseEditState = true
+            }
+        }
+    }
 })
 </script>
 
 <style scoped>
 .main-page .container {
     display: flex;
-    flex-direction: column;
     gap: 1.5vw;
 }
 

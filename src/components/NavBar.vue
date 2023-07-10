@@ -5,7 +5,7 @@
             <ul class="actions">
                 <li class="btn" :class="pageState('/home')" @click="navigate('/home')">Home</li>
                 <li class="btn" :class="pageState('/register')" @click="navigate('/register')">Register</li>
-                <li class="btn"  @click="changeLoginState">
+                <li class="btn" :class="pageState('/login')"  @click="changeLoginState">
                     {{ loggedIn ? 'Logout' : 'Login' }}
                 </li>
             </ul>
