@@ -1,6 +1,10 @@
 <template>
     <div>
-        <NavBar :logout="logout" :loggedIn="loggedIn" :navigate="navigate"/>
+        <NavBar :logout="logout"
+            :loggedIn="loggedIn"
+            :navigate="navigate"
+            :lastScroll="lastScroll"
+            :updateLastScroll="updateLastScroll"/>
 
         <router-view
             :online="online"
@@ -30,7 +34,8 @@ export default({
             courses: this.getFromLocalStorage('courses', []),
             currentRoute: window.location.pathname,
             online: navigator.onLine,
-            token: this.getFromLocalStorage('token', '')
+            token: this.getFromLocalStorage('token', ''),
+            lastScroll: 0
         }
     },
 
@@ -55,6 +60,10 @@ export default({
     },
 
     methods: {
+        updateLastScroll: function(newScroll){
+            this.lastScroll = newScroll
+        },
+
         logout: function(){
             this.token = null
             this.courses = []
@@ -185,12 +194,14 @@ export default({
 
 .page {
     width: 100vw;
-    height: 80vh;
+    min-height: 100vh;
+    padding-top: 15vh;
     display: grid;
     place-items: center;
 }
 
 .container {
+    /* background-color: green; */
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     display: flex;
