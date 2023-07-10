@@ -1,60 +1,129 @@
 <template>
-    <div class="page register-page">
+    <div class="page signup-page">
         <div class="container">
-            <h1 class="title">Register Course</h1>
-            <CourseForm :handleFormBtnClick="handleClick" :buttons="buttons" :actionCompletedStage="actionCompletedStage"/>
+            <h1 class="title">
+                College Registration Course
+            </h1>
+
+            <form action="" @submit="handleLoginSubmit">
+                <h2 class="signup">Signup</h2>
+
+                <div class="name">
+                    <div class="form-item">
+                        <label for="first-name">First Name</label>
+                        <input name="first-name"
+                            placeholder="Vincent"
+                            v-model="signupData.first_name"
+                        />
+                    </div>
+                    <div class="form-item">
+                        <label for="last-name">Last Name</label>
+                        <input name="last-name"
+                            placeholder="Makokha"
+                            v-model="signupData.last_name"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <label for="email">Email address</label>
+                    <input name="email"
+                        placeholder="email address"
+                        v-model="signupData.email"
+                    />
+                </div>
+    
+                <div class="form-item">
+                    <label for="password">Password</label>
+                    <input name="password"
+                        placeholder="password"
+                        v-model="signupData.password"
+                    />
+                </div>
+    
+                <input class="btn" type="submit" value="signup">
+            </form>
         </div>
     </div>
 </template>
 
 <script>
-import CourseForm from '@/components/CourseForm.vue';
 
 export default({
-    name: 'RegisterPage',
-
-    components: {
-        CourseForm,
-    },
+    name: 'signupPage',
 
     props: {
+        signup: Function,
         loggedIn: Boolean,
-        navigate: Function,
-        handleFormBtnClick: Function,
-        actionCompletedStage: Object
+        navigate: Function
     },
 
     data(){
         return {
-            buttons: [
-                {id: 1, name: 'register', action: 'Register', display: ''},
-                {id: 2, name: 'View Registered Courses', action: 'go-to-main', display: ''}
-            ]
+            signupData: {
+                email: "",
+                password: "",
+                first_name: "",
+                last_name: ""
+            }
+        } 
+    },
+
+    created: function(){
+        if(this.loggedIn){
+            this.navigate('/main')
         }
     },
 
     methods: {
-        handleClick: function(course, action, e){
+        handleLoginSubmit: function(e){
             e.preventDefault()
-
-            if(action === 'go-to-main'){
-                this.navigate('/main')
-            }else{
-                this.handleFormBtnClick(course, action, e)
-            }
-        }
-    },
-
-    created: function(){
-        if(!this.loggedIn){
-            this.navigate('/login')
+            this.signup(this.signupData)
         }
     }
 })
 </script>
 
 <style scoped>
-.register-page .btn {
-    justify-self: left;
+.signup-page .container {
+    outline: var(--outline-bold);
+    margin-bottom: 4rem;
+}
+
+form {
+    padding: 2vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+form .signup {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vw;
+    width: 100%;
+    justify-content: left;
+}
+
+.name .form-item {
+    width: calc(50% - 1vw);
+}
+
+.name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.form-item input {
+    outline: var(--outline-faint);
+    padding: 0.45vw;
 }
 </style>

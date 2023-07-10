@@ -24,9 +24,10 @@
                     />
                 </div>
     
-                <input class="btn" type="submit" value="enter system">
+                <input class="btn" type="submit" value="login">
             </form>
         </div>
+
     </div>
 </template>
 

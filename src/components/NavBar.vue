@@ -3,9 +3,20 @@
         <div class="container">
             <h1 class="icon" @click="navigate('/home')">Code Challenge</h1>
             <ul class="actions">
-                <li v-if="loggedIn" class="btn" :class="pageState('/home')" @click="navigate('/home')">Home</li>
-                <li v-if="loggedIn" class="btn" :class="pageState('/register')" @click="navigate('/register')">Register</li>
-                <li class="btn" :class="pageState('/login')"  @click="changeLoginState">
+                <li v-if="loggedIn" class="btn"
+                    :class="pageState('/home')"
+                    @click="navigate('/home')">
+                    Home
+                </li>
+                <li v-if="!loggedIn"
+                    class="btn"
+                    :class="pageState('/register')"
+                    @click="navigate('/register')">
+                    Signup
+                </li>
+                <li class="btn"
+                    :class="pageState('/login')"
+                    @click="changeLoginState">
                     {{ loggedIn ? 'Logout' : 'Login' }}
                 </li>
             </ul>

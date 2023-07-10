@@ -10,6 +10,7 @@
         <router-view
             :online="online"
             :login="login"
+            :signup="signup"
             :loggedIn="loggedIn"
             :courses="courses"
             :navigate="navigate"
@@ -94,6 +95,31 @@ export default({
                     'Accept': 'text/plain'
                 },
                 body: JSON.stringify({email: email, password: password})
+            }).then(res => {
+                if(res.ok){
+                    res.json().then(data =>{
+                        this.$router.push('/home')
+
+                        this.updateLocalStorage('token', data.token)
+
+                        this.loadCourses(data.token)
+                    })
+                }else{
+                    res.json().then(error => {
+                        console.warn(error)
+                    })
+                }
+            })           
+        },
+
+        signup: function(signupData){
+            fetch(`${apiHost}/signup`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'text/plain'
+                },
+                body: JSON.stringify(signupData)
             }).then(res => {
                 if(res.ok){
                     res.json().then(data =>{
