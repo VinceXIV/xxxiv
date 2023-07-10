@@ -4,7 +4,8 @@
             :loggedIn="loggedIn"
             :navigate="navigate"
             :lastScroll="lastScroll"
-            :updateLastScroll="updateLastScroll"/>
+            :updateLastScroll="updateLastScroll"
+            :currentPath="currentPath"/>
 
         <router-view
             :online="online"
@@ -33,7 +34,7 @@ export default({
     data() {
         return {
             courses: this.getFromLocalStorage('courses', []),
-            currentRoute: window.location.pathname,
+            currentPath: window.location.pathname,
             online: navigator.onLine,
             token: this.getFromLocalStorage('token', ''),
             lastScroll: 0
@@ -104,6 +105,7 @@ export default({
             // If we are currently not in the log in page
             if(this.$router.history.current.path !== path){
                 this.$router.push(path)
+                this.currentPath = path
             }           
         },
 

@@ -1,11 +1,11 @@
 <template>
     <nav ref="navbar">
         <div class="container">
-            <h1>Code Challenge</h1>
+            <h1 class="icon" @click="navigate('/home')">Code Challenge</h1>
             <ul class="actions">
-                <li class="btn" @click="navigate('/home')">Home</li>
-                <li class="btn" @click="navigate('/register')">Register</li>
-                <li class="btn" @click="changeLoginState">
+                <li class="btn" :class="pageState('/home')" @click="navigate('/home')">Home</li>
+                <li class="btn" :class="pageState('/register')" @click="navigate('/register')">Register</li>
+                <li class="btn"  @click="changeLoginState">
                     {{ loggedIn ? 'Logout' : 'Login' }}
                 </li>
             </ul>
@@ -22,12 +22,12 @@ export default({
         loggedIn: Boolean,
         navigate: Function,
         lastScroll: Number,
-        updateLastScroll: Function
+        updateLastScroll: Function,
+        currentPath: String
     },
 
     mounted: function(){
         window.addEventListener("scroll", this.handleScroll)
-
     },
 
     methods: {
@@ -37,6 +37,14 @@ export default({
             }else {
                 this.navigate('/main')
             }
+        },
+
+        pageState(path){
+            // If the current active path (on the url bar)
+            // is same as the one received by this function
+            if(this.currentPath === path){
+                return 'active'
+            } 
         },
 
         handleScroll: function(){
@@ -64,7 +72,7 @@ export default({
 })
 </script>
 
-<style>
+<style scoped>
 nav {
     width: 100vw;
     height: 10vh;
@@ -72,6 +80,10 @@ nav {
     display: grid;
     place-items: center;
     background-color: rgb(0, 119, 190, 1);
+}
+
+nav .btn {
+    border-radius: 0;
 }
 
 nav .container {
@@ -96,10 +108,13 @@ nav .actions {
     gap: 1vw;
 }
 
-/* nav .actions .btn {
-    margin-left: 1vw;
-    margin-right: 1vw;
-} */
+nav .actions .active {
+    border-bottom: 0.1rem solid white;
+}
+
+.icon {
+    cursor: pointer;
+}
 
 @keyframes reduce-opacity {
     from {opacity: 1}
