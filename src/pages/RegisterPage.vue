@@ -2,7 +2,7 @@
     <div class="page register-page">
         <div class="container">
             <h1 class="title">Register Course</h1>
-            <CourseForm :handleFormBtnClick="handleFormBtnClick" :buttons="buttons"/>
+            <CourseForm :handleFormBtnClick="handleClick" :buttons="buttons"/>
         </div>
     </div>
 </template>
@@ -26,8 +26,21 @@ export default({
     data(){
         return {
             buttons: [
-                {id: 1, action: 'Register', display: ''}
+                {id: 1, action: 'Register', display: ''},
+                {id: 2, action: 'View Registered Courses', display: ''}
             ]
+        }
+    },
+
+    methods: {
+        handleClick: function(course, action, e){
+            e.preventDefault()
+
+            if(action === 'View Registered Courses'){
+                this.navigate('/main')
+            }else{
+                this.handleFormBtnClick(course, action, e)
+            }
         }
     },
 
