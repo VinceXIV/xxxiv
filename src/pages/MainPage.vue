@@ -2,7 +2,7 @@
     <div class="page main-page">
         <div class="container">
             <CourseTable :courses="courses" :updateCourses="updateCourses" :navigate="navigate"/>
-            <button class="btn" @click="navigate('/register')">Register A New Course</button>
+            <button class="btn register-btn" @click="navigate('/register')">Register A New Course</button>
         </div>
     </div>
 </template>
@@ -41,5 +41,9 @@ export default({
 
 .main-page .btn {
     width: 100%;
+}
+
+.register-btn {
+    background-color: rgb(34, 124, 34);
 }
 </style>
