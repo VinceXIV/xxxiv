@@ -42,10 +42,10 @@ export default({
     data(){
         return {
             buttons: [
-                {id: 1, action: 'Register', visibility: 'hidden'},
-                {id: 2, action: 'Edit', visibility: ''},
-                {id: 3, action: 'Remove', visibility: ''},
-                {id: 4, action: 'Cancel', visibility: ''},
+                {id: 1, name: 'Register', action: 'register', visibility: 'hidden'},
+                {id: 2, name: 'Save', action: 'edit', visibility: ''},
+                {id: 3, name: 'Remove', action: 'remove', visibility: ''},
+                {id: 4, name: 'Cancel', action: 'cancel', visibility: ''},
             ]
         }
     },

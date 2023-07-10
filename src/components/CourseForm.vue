@@ -19,6 +19,9 @@
             <p v-if="actionCompletedStage.completed && actionCompletedStage.action === 'registered'">
                 Course {{actionCompletedStage.action}} successfully
             </p>
+            <p v-else-if="actionCompletedStage.completed && actionCompletedStage.action !== 'registered'">
+                Done!
+            </p>
         </div>
 
         <div class="form-btns">
@@ -26,7 +29,7 @@
                 class="btn"
                 :class="btn.visibility"
                 @click="(e)=>handleFormBtnClick(formData, btn.action, e)">
-                {{ btn.action }}
+                {{ btn.name }}
             </button>
         </div>
     </form>
@@ -104,6 +107,9 @@ form {
     background-color: brown;
 }
 
+.form-message {
+    height: 3vw;
+}
 .form-message p{
     color: green;
 }
