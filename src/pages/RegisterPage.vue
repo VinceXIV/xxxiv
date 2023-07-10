@@ -3,21 +3,18 @@
         <div class="container">
             <h1 class="title">Register Course</h1>
             <CourseForm :updateCourses="updateCourses" :handleFormSubmit="registerCourse"/>
-            <CourseTable :courses="courses" :updateCourses="updateCourses"/>
         </div>
     </div>
 </template>
 
 <script>
 import CourseForm from '@/components/CourseForm.vue';
-import CourseTable from '@/components/CourseTable.vue';
 
 export default({
     name: 'RegisterPage',
 
     components: {
         CourseForm,
-        CourseTable
     },
 
     props: {
