@@ -53,10 +53,14 @@ export default({
     },
 
     methods: {
-        handleCourseTableBtnClick: function(course, action){
+        handleCourseTableBtnClick: function(course, action, e){
+            e.preventDefault()
+            
             if(action === 'edit'){
                 this.activeCourse = course
                 this.activeCourseEditState = true
+            }else if(action === 'remove'){
+                this.handleFormBtnClick(course, action, e)
             }
         },
 

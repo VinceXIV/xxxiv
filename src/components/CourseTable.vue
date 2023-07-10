@@ -19,11 +19,7 @@
                 <th class="subtitle">Select</th>
             </tr>
 
-            <tr :id="`record-${course.id}`"
-                class="record"
-                v-for="course in courses"
-                :key="course.id" @click="makeActive(course)">
-
+            <tr :id="`record-${course.id}`" class="record" v-for="course in courses" :key="course.id">
                 <td>{{ course.id }}</td>
                 <td>{{ course.course_name }}</td>
                 <td>{{ course.course_teacher_name }}</td>
@@ -34,7 +30,7 @@
                         Edit
                     </button>
                     <button class="btn"
-                        @click="(e)=>handleCourseTableBtnClick(course, 'delete', e)">
+                        @click="(e)=>handleCourseTableBtnClick(course, 'remove', e)">
                         Delete
                     </button>
                 </td>
@@ -57,16 +53,6 @@ export default ({
     data(){
         return {
             activeCourse: null
-        }
-    },
-
-    methods: {
-        makeActive: function(course){
-            const allRecords = this.$refs.courseTable.querySelectorAll('.record')
-            allRecords.forEach(record => record.classList.remove('active'))
-            
-            this.activeCourse = course
-            this.$refs.courseTable.querySelector(`#record-${course.id}`)?.classList.add('active')
         }
     }
 })
