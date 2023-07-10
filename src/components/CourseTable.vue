@@ -5,7 +5,8 @@
                 Available Courses
             </h1>
 
-            <button class="btn register-btn" @click="navigate('/register')">
+            <button class="btn register-btn" 
+                @click="(e)=>handleCourseTableBtnClick(null, 'register', e)">
                 Register A New Course
             </button>
         </div>

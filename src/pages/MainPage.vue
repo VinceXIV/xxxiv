@@ -42,7 +42,7 @@ export default({
     data(){
         return {
             buttons: [
-                {id: 1, name: 'Register', action: 'register', visibility: 'hidden'},
+                {id: 1, name: 'Register', action: 'register', visibility: ''},
                 {id: 2, name: 'Save', action: 'edit', visibility: ''},
                 {id: 3, name: 'Remove', action: 'remove', visibility: ''},
                 {id: 4, name: 'Cancel', action: 'cancel', visibility: ''},
@@ -62,6 +62,9 @@ export default({
 
             if(action === 'edit'){
                 this.setActiveCourse(course)
+                this.setActiveCourseEditState(true)
+            }else if(action === 'register'){
+                this.setActiveCourse({})
                 this.setActiveCourseEditState(true)
             }else if(action === 'remove'){
                 this.handleFormBtnClick(course, action, e)
