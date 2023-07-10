@@ -27,11 +27,8 @@ export default({
 
     props: {
         courses: Array,
-        updateCourses: Function,
         loggedIn: Boolean,
         navigate: Function,
-        editCourse: Function,
-        deleteCourse: Function
     },
 
     data(){

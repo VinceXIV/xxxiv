@@ -50,7 +50,6 @@ export default ({
 
     props: {
         courses: Array,
-        updateCourses: Function,
         handleCourseTableBtnClick: Function,
         navigate: Function
     },

@@ -12,10 +12,7 @@
             :login="login"
             :loggedIn="loggedIn"
             :courses="courses"
-            :updateCourses="updateCourses"
             :navigate="navigate"
-            :registerCourse="registerCourse"
-            :editCourse="editCourse"
             :handleFormBtnClick="handleFormBtnClick"
         ></router-view>
     </div>
