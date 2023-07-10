@@ -47,7 +47,8 @@ export default ({
     props: {
         courses: Array,
         handleCourseTableBtnClick: Function,
-        navigate: Function
+        navigate: Function,
+        actionCompletedStage: Object
     },
 
     data(){

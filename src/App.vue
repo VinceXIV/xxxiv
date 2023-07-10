@@ -14,6 +14,7 @@
             :courses="courses"
             :navigate="navigate"
             :handleFormBtnClick="handleFormBtnClick"
+            :actionCompletedStage="actionCompletedStage"
         ></router-view>
     </div>
 </template>
@@ -36,7 +37,13 @@ export default({
             currentPath: window.location.pathname,
             online: navigator.onLine,
             token: this.getFromLocalStorage('token', ''),
-            lastScroll: 0
+            lastScroll: 0,
+            actionCompletedStage: {
+                action: '',
+                started: false,
+                doing: false,
+                completed: false
+            }
         }
     },
 
@@ -111,6 +118,17 @@ export default({
         handleFormBtnClick: function(formData, action, e){
             e.preventDefault()
 
+            let actionName
+            if(action === 'Register'){
+                actionName = 'registered'
+            }else if(action === 'Remove'){
+                actionName = 'removed'
+            }else if(action === 'edit'){
+                actionName === 'edited'
+            }
+
+            this.actionCompletedStage = {...this.actionCompletedStage, action: actionName, started: true}
+
             if(action.toLowerCase() === 'register'){
                 this.registerCourse(formData)
             }else if(action.toLowerCase() === 'edit' && formData.id){
@@ -131,9 +149,20 @@ export default({
                     body: JSON.stringify(formData)
                 })
 
+            this.actionCompletedStage = {...this.actionCompletedStage, doing: true}
+
             if(res.ok){
                 const newCourse = await res.json().then(data => data)
                 this.updateCourses(newCourse, 'add')
+
+                this.actionCompletedStage = {...this.actionCompletedStage, completed: true}
+                setTimeout(()=>{
+                    this.actionCompletedStage = {
+                        started: false,
+                        doing: false,
+                        completed: false
+                    }
+                }, 3000)       
             }else{
                 res.json().then(error => console.warn(error))
             }
@@ -150,9 +179,20 @@ export default({
                     body: JSON.stringify(formData)
                 })
 
+            this.actionCompletedStage = {...this.actionCompletedStage, doing: true}
+
             if(res.ok){
                 const newCourse = await res.json().then(data => data)
                 this.updateCourses(newCourse, 'edit')
+
+                this.actionCompletedStage = {...this.actionCompletedStage, completed: true}
+                setTimeout(()=>{
+                    this.actionCompletedStage = {
+                        started: false,
+                        doing: false,
+                        completed: false
+                    }
+                }, 3000)
             }else{
                 res.json().then(error => console.warn(error))
             }
@@ -166,9 +206,20 @@ export default({
                         'Authorization': `Bearer ${this.getFromLocalStorage('token')}`
                     }
                 })
+            
+            this.actionCompletedStage = {...this.actionCompletedStage, doing: true}
 
             if(res.ok){
                 this.updateCourses({id: courseId}, 'remove')
+
+                this.actionCompletedStage = {...this.actionCompletedStage, completed: true}
+                setTimeout(()=>{
+                    this.actionCompletedStage = {
+                        started: false,
+                        doing: false,
+                        completed: false
+                    }
+                }, 3000)
             }else{
                 res.json().then(error => console.warn(error))
             }

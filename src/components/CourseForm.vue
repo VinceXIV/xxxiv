@@ -15,6 +15,12 @@
             <input name="hours" v-model="formData.course_total_hours" placeholder="Enter number of hours"/>
         </div>
 
+        <div class="form-message" >
+            <p v-if="actionCompletedStage.completed">
+                Course {{actionCompletedStage.action}} successfully
+            </p>
+        </div>
+
         <div class="form-btns">
             <button v-for="btn in buttons" :key="`btn-${btn.id}`"
                 class="btn"
@@ -33,7 +39,8 @@ export default({
     props: {
         handleFormBtnClick: Function,
         initialFormData: Object,
-        buttons: Array
+        buttons: Array,
+        actionCompletedStage: Object
     },
 
     data(){
@@ -95,5 +102,9 @@ form {
 .btn.hidden {
     visibility: hidden;
     background-color: brown;
+}
+
+.form-message p{
+    color: green;
 }
 </style>

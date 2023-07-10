@@ -2,7 +2,7 @@
     <div class="page register-page">
         <div class="container">
             <h1 class="title">Register Course</h1>
-            <CourseForm :handleFormBtnClick="handleClick" :buttons="buttons"/>
+            <CourseForm :handleFormBtnClick="handleClick" :buttons="buttons" :actionCompletedStage="actionCompletedStage"/>
         </div>
     </div>
 </template>
@@ -20,7 +20,8 @@ export default({
     props: {
         loggedIn: Boolean,
         navigate: Function,
-        handleFormBtnClick: Function
+        handleFormBtnClick: Function,
+        actionCompletedStage: Object
     },
 
     data(){
