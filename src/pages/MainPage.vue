@@ -8,10 +8,7 @@
                 :initialFormData="activeCourse"
                 :key="`edit-course${activeCourse.id}`"
             />
-            <CourseTable :courses="courses"
-                :handleCourseTableBtnClick="handleCourseTableBtnClick"
-                :navigate="navigate"    
-            />
+            <CourseTable :courses="courses" :navigate="navigate" />
         </div>
     </div>
 </template>
@@ -44,7 +41,7 @@ export default({
             buttons: [
                 {id: 1, action: 'Register', visibility: 'hidden'},
                 {id: 2, action: 'Edit', visibility: ''},
-                {id: 3, action: 'Remote', visibility: ''},
+                {id: 3, action: 'Remove', visibility: ''},
                 {id: 4, action: 'Cancel', visibility: ''},
             ]
         }
@@ -62,6 +59,10 @@ export default({
                 this.activeCourse = course
                 this.activeCourseEditState = true
             }
+        },
+
+        toggleActiveEditState: function(){
+            this.activeCourseEditState = !this.activeCourseEditState
         }
     }
 })

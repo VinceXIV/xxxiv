@@ -16,6 +16,7 @@
             :navigate="navigate"
             :registerCourse="registerCourse"
             :editCourse="editCourse"
+            :handleFormBtnClick="handleFormBtnClick"
         ></router-view>
     </div>
 </template>
@@ -108,6 +109,14 @@ export default({
                 this.$router.push(path)
                 this.currentPath = path
             }           
+        },
+
+        handleFormBtnClick: function(formData, action, e){
+            e.preventDefault()
+
+            if(action.toLowerCase() === 'register'){
+                this.registerCourse(formData)
+            }
         },
 
         registerCourse: async function(formData){

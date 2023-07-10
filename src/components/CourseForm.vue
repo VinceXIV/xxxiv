@@ -19,7 +19,7 @@
             <button v-for="btn in buttons" :key="`btn-${btn.id}`"
                 class="btn"
                 :class="btn.visibility"
-                @click="(e)=>handleBtnClick(btn.action, e)">
+                @click="(e)=>handleFormBtnClick(formData, btn.action, e)">
                 {{ btn.action }}
             </button>
         </div>
