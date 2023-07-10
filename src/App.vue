@@ -243,6 +243,10 @@ export default({
     font-size: 1rem;
 }
 
+ul li {
+    list-style: none;
+}
+
 
 /* RESPONSIVENESS */
 

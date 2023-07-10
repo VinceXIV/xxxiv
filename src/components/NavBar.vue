@@ -2,9 +2,13 @@
     <nav ref="navbar">
         <div class="container">
             <h1>Code Challenge</h1>
-            <button class="btn" @click="changeLoginState">
-                {{ loggedIn ? 'Logout' : 'Login' }}
-            </button>
+            <ul class="actions">
+                <li class="btn" @click="navigate('/home')">Home</li>
+                <li class="btn" @click="navigate('/register')">Register</li>
+                <li class="btn" @click="changeLoginState">
+                    {{ loggedIn ? 'Logout' : 'Login' }}
+                </li>
+            </ul>
         </div>
     </nav>
 </template>
@@ -86,6 +90,16 @@ nav.scroll-down {
     animation-duration: 500ms;
     animation-fill-mode: forwards;
 }
+
+nav .actions {
+    display: flex;
+    gap: 1vw;
+}
+
+/* nav .actions .btn {
+    margin-left: 1vw;
+    margin-right: 1vw;
+} */
 
 @keyframes reduce-opacity {
     from {opacity: 1}
