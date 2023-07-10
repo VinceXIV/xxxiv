@@ -15,6 +15,10 @@
             :navigate="navigate"
             :handleFormBtnClick="handleFormBtnClick"
             :actionCompletedStage="actionCompletedStage"
+            :activeCourseEditState="activeCourseEditState"
+            :activeCourse="activeCourse"
+            :setActiveCourseEditState="setActiveCourseEditState"
+            :setActiveCourse="setActiveCourse"
         ></router-view>
     </div>
 </template>
@@ -38,6 +42,8 @@ export default({
             online: navigator.onLine,
             token: this.getFromLocalStorage('token', ''),
             lastScroll: 0,
+            activeCourseEditState: false,
+            activeCourse: {},
             actionCompletedStage: {
                 action: '',
                 started: false,
@@ -274,6 +280,14 @@ export default({
             }else {
                 return defaultVal
             }
+        },
+
+        setActiveCourseEditState: function(bool){
+            this.activeCourseEditState = !!bool
+        },
+
+        setActiveCourse(course){
+            this.activeCourse = course
         }
     }
 })

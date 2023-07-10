@@ -7,6 +7,7 @@
                 class="form-modal"
                 :initialFormData="activeCourse"
                 :handleFormBtnClick="handleFormBtnClick"
+                :actionCompletedStage="actionCompletedStage"
                 :key="`edit-course${activeCourse.id}`"
             />
             <CourseTable :courses="courses" :navigate="navigate" :handleCourseTableBtnClick="handleCourseTableBtnClick" />
@@ -30,13 +31,16 @@ export default({
         courses: Array,
         loggedIn: Boolean,
         navigate: Function,
-        handleFormBtnClick: Function
+        handleFormBtnClick: Function,
+        actionCompletedStage: Object,
+        activeCourseEditState: Boolean,
+        activeCourse: Object,
+        setActiveCourseEditState: Function,
+        setActiveCourse: Function
     },
 
     data(){
         return {
-            activeCourseEditState: false,
-            activeCourse: {},
             buttons: [
                 {id: 1, action: 'Register', visibility: 'hidden'},
                 {id: 2, action: 'Edit', visibility: ''},
@@ -55,17 +59,13 @@ export default({
     methods: {
         handleCourseTableBtnClick: function(course, action, e){
             e.preventDefault()
-            
+
             if(action === 'edit'){
-                this.activeCourse = course
-                this.activeCourseEditState = true
+                this.setActiveCourse(course)
+                this.setActiveCourseEditState(true)
             }else if(action === 'remove'){
                 this.handleFormBtnClick(course, action, e)
             }
-        },
-
-        toggleActiveEditState: function(){
-            this.activeCourseEditState = !this.activeCourseEditState
         }
     }
 })

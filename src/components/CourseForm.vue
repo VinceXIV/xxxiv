@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-message" >
-            <p v-if="actionCompletedStage.completed">
+            <p v-if="actionCompletedStage.completed && actionCompletedStage.action === 'registered'">
                 Course {{actionCompletedStage.action}} successfully
             </p>
         </div>
