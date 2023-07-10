@@ -6,9 +6,12 @@
                 :buttons="buttons"
                 class="form-modal"
                 :initialFormData="activeCourse"
-                :key="`edit-course${activeCourse.id}`"/>
-            <CourseTable :courses="courses" :handleCourseTableBtnClick="handleCourseTableBtnClick"/>
-            <button class="btn register-btn" @click="navigate('/register')">Register A New Course</button>
+                :key="`edit-course${activeCourse.id}`"
+            />
+            <CourseTable :courses="courses"
+                :handleCourseTableBtnClick="handleCourseTableBtnClick"
+                :navigate="navigate"    
+            />
         </div>
     </div>
 </template>
@@ -72,9 +75,5 @@ export default({
 
 .main-page .btn {
     width: 100%;
-}
-
-.register-btn {
-    background-color: rgb(34, 124, 34);
 }
 </style>

@@ -1,6 +1,14 @@
 <template>
     <div class="registered-courses">
-        <h1 class="title">Available Courses</h1>
+        <div class="form-details">
+            <h1 class="title">
+                Available Courses
+            </h1>
+
+            <button class="btn register-btn" @click="navigate('/register')">
+                Register A New Course
+            </button>
+        </div>
 
         <table ref="courseTable">
             <tr class="header">
@@ -43,7 +51,8 @@ export default ({
     props: {
         courses: Array,
         updateCourses: Function,
-        handleCourseTableBtnClick: Function
+        handleCourseTableBtnClick: Function,
+        navigate: Function
     },
 
     data(){
@@ -71,6 +80,12 @@ export default ({
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+.form-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .registered-courses table {
@@ -111,5 +126,9 @@ td {
     justify-content: center;
     gap: 1vw;
     margin-top: auto;
+}
+
+.register-btn {
+    background-color: rgb(34, 124, 34);
 }
 </style>
