@@ -6,9 +6,10 @@
                 :buttons="buttons"
                 class="form-modal"
                 :initialFormData="activeCourse"
+                :handleFormBtnClick="handleFormBtnClick"
                 :key="`edit-course${activeCourse.id}`"
             />
-            <CourseTable :courses="courses" :navigate="navigate" />
+            <CourseTable :courses="courses" :navigate="navigate" :handleCourseTableBtnClick="handleCourseTableBtnClick" />
         </div>
     </div>
 </template>
@@ -29,6 +30,7 @@ export default({
         courses: Array,
         loggedIn: Boolean,
         navigate: Function,
+        handleFormBtnClick: Function
     },
 
     data(){

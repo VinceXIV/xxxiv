@@ -40,6 +40,7 @@ export default({
         return {
             formData: this.initialFormData || 
                 {
+                    id: null, // Will only be relevant when updating or deleting course
                     course_name: '',
                     course_teacher_name: '',
                     course_total_hours: ''

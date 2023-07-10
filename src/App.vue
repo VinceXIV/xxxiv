@@ -113,6 +113,10 @@ export default({
 
             if(action.toLowerCase() === 'register'){
                 this.registerCourse(formData)
+            }else if(action.toLowerCase() === 'edit' && formData.id){
+                this.editCourse(formData)
+            }else if(action.toLowerCase() === 'remove' && formData.id){
+                this.removeCourse(formData.id)
             }
         },
 
@@ -136,7 +140,7 @@ export default({
         },
 
         editCourse: async function(formData){
-            const res = await fetch(`${apiHost}/courses`, {
+            const res = await fetch(`${apiHost}/courses/${formData.id}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -148,7 +152,23 @@ export default({
 
             if(res.ok){
                 const newCourse = await res.json().then(data => data)
-                this.updateCourses(newCourse, 'add')
+                this.updateCourses(newCourse, 'edit')
+            }else{
+                res.json().then(error => console.warn(error))
+            }
+        },
+
+        removeCourse: async function(courseId){
+            const res = await fetch(`${apiHost}/courses/${courseId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${this.getFromLocalStorage('token')}`
+                    }
+                })
+
+            if(res.ok){
+                this.updateCourses({id: courseId}, 'remove')
             }else{
                 res.json().then(error => console.warn(error))
             }
