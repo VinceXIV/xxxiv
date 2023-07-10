@@ -2,7 +2,7 @@
     <div class="page register-page">
         <div class="container">
             <h1 class="title">Register Course</h1>
-            <CourseForm :updateCourses="updateCourses" />
+            <CourseForm :updateCourses="updateCourses" :handleFormSubmit="registerCourse"/>
             <CourseTable :courses="courses" :updateCourses="updateCourses"/>
             <button class="btn" @click="navigate('/main')">See More Courses</button>
         </div>
@@ -25,7 +25,8 @@ export default({
         courses: Array,
         updateCourses: Function,
         loggedIn: Boolean,
-        navigate: Function
+        navigate: Function,
+        registerCourse: Function
     },
 
     created: function(){
