@@ -2,7 +2,7 @@
     <div class="page main-page">
         <div class="container">
             <CourseTable :courses="courses" :updateCourses="updateCourses" :navigate="navigate"/>
-            <button class="btn" @click="navigate('/register')">Register Course</button>
+            <button class="btn" @click="navigate('/register')">Register A New Course</button>
         </div>
     </div>
 </template>
@@ -32,10 +32,14 @@ export default({
 })
 </script>
 
-<style>
+<style scoped>
 .main-page .container {
     display: flex;
     flex-direction: column;
     gap: 1.5vw;
+}
+
+.main-page .btn {
+    width: 100%;
 }
 </style>

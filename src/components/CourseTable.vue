@@ -16,8 +16,9 @@
                 <td>{{ course.course_name }}</td>
                 <td>{{ course.course_teacher_name }}</td>
                 <td>{{ course.course_total_hours }}</td>
-                <td>
-                    <button class="btn">Select</button>
+                <td class="buttons">
+                    <button class="btn">Edit</button>
+                    <button class="btn">Delete</button>
                 </td>
             </tr>
         </table>
@@ -56,8 +57,28 @@ tr {
 
 th, td {
     text-align: left;
+    padding: 0.5vw;
+    font-size: 1rem;
 }
 .register-page .container {
     width: max(40vw, 40rem);
+}
+
+.record .btn {
+    width: 5rem;
+    min-width: max-content;
+}
+
+td {
+    height: 100%;
+}
+
+.record .buttons {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    margin-top: auto;
 }
 </style>
