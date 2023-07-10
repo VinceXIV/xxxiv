@@ -2,7 +2,7 @@
     <div class="page register-page">
         <div class="container">
             <h1 class="title">Register Course</h1>
-            <CourseForm :updateCourses="updateCourses" :handleFormSubmit="registerCourse"/>
+            <CourseForm :handleFormSubmit="registerCourse"/>
         </div>
     </div>
 </template>
@@ -18,8 +18,6 @@ export default({
     },
 
     props: {
-        courses: Array,
-        updateCourses: Function,
         loggedIn: Boolean,
         navigate: Function,
         registerCourse: Function

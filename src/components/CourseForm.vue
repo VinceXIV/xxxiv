@@ -24,7 +24,6 @@ export default({
     name: 'CourseForm',
 
     props: {
-        updateCourses: Function,
         handleFormSubmit: Function
     },
 
