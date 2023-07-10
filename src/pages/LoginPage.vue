@@ -51,7 +51,7 @@ export default({
 
     created: function(){
         if(this.loggedIn){
-            this.navigate('/main')
+            this.navigate('/home')
         }
     },
 

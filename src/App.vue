@@ -288,7 +288,7 @@ export default({
             if(res.ok){
                 const courses = await res.json().then(data => data)
                 this.updateLocalStorage('courses', courses)
-                this.navigate('/main')
+                this.navigate('/home')
             }else {
                 res.json().then(error => console.warn(error))
             }

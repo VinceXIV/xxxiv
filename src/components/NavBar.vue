@@ -46,7 +46,7 @@ export default({
             if(this.loggedIn){
                 this.logout()
             }else {
-                this.navigate('/main')
+                this.navigate('/home')
             }
         },
 

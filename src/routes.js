@@ -5,7 +5,6 @@ import PageNotFound from './pages/404.vue'
 
 const routes = [
   { path: '/login', component: LoginPage },
-  { path: '/main', component: MainPage },
   { path: '/home', component: MainPage },
   { path: '/register', component: RegisterPage},
   { path: '/', component: MainPage },
