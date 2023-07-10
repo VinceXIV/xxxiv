@@ -141,6 +141,8 @@ export default({
                 this.editCourse(formData)
             }else if(action.toLowerCase() === 'remove' && formData.id){
                 this.removeCourse(formData.id)
+            }else if(action.toLowerCase() === 'cancel'){
+                this.setActiveCourseEditState(false)
             }
         },
 
