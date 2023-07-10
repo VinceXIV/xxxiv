@@ -37,7 +37,7 @@ export default({
         handleClick: function(course, action, e){
             e.preventDefault()
 
-            if(action === 'go-to-home'){
+            if(action === 'go-to-main'){
                 this.navigate('/main')
             }else{
                 this.handleFormBtnClick(course, action, e)
