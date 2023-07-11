@@ -11,6 +11,7 @@
                 <div class="form-item">
                     <label for="email">Email address</label>
                     <input name="email"
+                        type="email"
                         placeholder="email address"
                         v-model="email"
                     />

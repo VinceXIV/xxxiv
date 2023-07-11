@@ -12,6 +12,7 @@
                     <div class="form-item">
                         <label for="first-name">First Name</label>
                         <input name="first-name"
+                            type="text"
                             placeholder="Vincent"
                             v-model="signupData.first_name"
                         />
@@ -19,6 +20,7 @@
                     <div class="form-item">
                         <label for="last-name">Last Name</label>
                         <input name="last-name"
+                            type="text"
                             placeholder="Makokha"
                             v-model="signupData.last_name"
                         />
@@ -28,6 +30,7 @@
                 <div class="form-item">
                     <label for="email">Email address</label>
                     <input name="email"
+                        type="email"
                         placeholder="email address"
                         v-model="signupData.email"
                     />

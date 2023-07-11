@@ -2,17 +2,17 @@
     <form @submit.prevent="handleBtnClick">
         <div class="form-item">
             <label for="course-name">Course name</label>
-            <input name="course-name" v-model="formData.course_name" placeholder="Enter course name"/>
+            <input name="course-name" type="text" v-model="formData.course_name" placeholder="Enter course name"/>
         </div>
 
         <div class="form-item">
             <label for="teacher-name">Teacher name</label>
-            <input name="teacher-name" v-model="formData.course_teacher_name" placeholder="Enter teacher name"/>
+            <input name="teacher-name" type="text" v-model="formData.course_teacher_name" placeholder="Enter teacher name"/>
         </div>
 
         <div class="form-item">
             <label for="hours">Total # of hours</label>
-            <input name="hours" v-model="formData.course_total_hours" placeholder="Enter number of hours"/>
+            <input name="hours" type="number" v-model="formData.course_total_hours" placeholder="Enter number of hours"/>
         </div>
 
         <div class="form-message" >
