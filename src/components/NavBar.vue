@@ -4,7 +4,6 @@
             <h1 class="icon" @click="navigate('/home')">Code Challenge</h1>
             <ul class="actions">
                 <li v-if="loggedIn" class="btn"
-                    :key="currentPath"
                     :class="pageState('/home')"
                     @click="navigate('/home')">
                     Home
