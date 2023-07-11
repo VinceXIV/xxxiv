@@ -140,7 +140,7 @@ export default({
         navigate: function(path){
             // path expected is in the form: '/home', '/login', etc
 
-            // If we are currently not in the log in page
+            // If we are currently not already in page designated by path
             if(this.$router.history.current.path !== path){
                 this.$router.push(path)
                 this.currentPath = path
