@@ -1,5 +1,7 @@
 # code-challenge
 
+CRUD app using Vue and Laravel
+
 ## Project setup
 ```
 npm install
