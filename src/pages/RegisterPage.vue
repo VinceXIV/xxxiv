@@ -74,6 +74,8 @@ export default({
     },
 
     created: function(){
+        // If we are already logged in, no need to stay on this page. Simply
+        // redirect to the home/main page
         if(this.loggedIn){
             this.navigate('/home')
         }

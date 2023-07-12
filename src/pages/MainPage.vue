@@ -4,7 +4,6 @@
             <h1 v-if="activeCourseEditState" class="title">Edit Course</h1>
             <CourseForm v-if="activeCourseEditState"
                 :buttons="buttons"
-                class="form-modal"
                 :initialFormData="activeCourse"
                 :handleFormBtnClick="handleFormBtnClick"
                 :actionCompletedStage="actionCompletedStage"

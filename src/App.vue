@@ -41,11 +41,15 @@ export default({
             courses: this.getFromLocalStorage('courses', []),
             currentPath: window.location.pathname,
             online: navigator.onLine,
-            token: this.getFromLocalStorage('token', ''),
+            token: this.getFromLocalStorage('token', ''), //Use token we stored in local storage
             lastScroll: 0,
-            activeCourseEditState: false,
+            activeCourseEditState: false, // By default, we are not editing any course
             activeCourse: {},
             actionCompletedStage: {
+                // Would be used to update the user on the status of requests they make
+                // For instance, when they update a data, we can show the stage on the
+                // UI. e.g if the stage is "completed", we can tell the user the course
+                // has been deleted, added, or deleted successfully
                 action: '',
                 started: false,
                 doing: false,
@@ -124,9 +128,7 @@ export default({
                 if(res.ok){
                     res.json().then(data =>{
                         this.$router.push('/home')
-
                         this.updateLocalStorage('token', data.token)
-
                         this.loadCourses(data.token)
                     })
                 }else{
@@ -150,16 +152,8 @@ export default({
         handleFormBtnClick: function(formData, action, e){
             e.preventDefault()
 
-            let actionName
-            if(action === 'Register'){
-                actionName = 'registered'
-            }else if(action === 'Remove'){
-                actionName = 'removed'
-            }else if(action === 'edit'){
-                actionName === 'edited'
-            }
-
-            this.actionCompletedStage = {...this.actionCompletedStage, action: actionName, started: true}
+            // We are currently starting the action (action can be creating, editing, or deleting a course)
+            this.actionCompletedStage = {...this.actionCompletedStage, action: action, started: true}
 
             if(action.toLowerCase() === 'register'){
                 this.registerCourse(formData)
@@ -183,20 +177,18 @@ export default({
                     body: JSON.stringify(formData)
                 })
 
+            // Update the stage
             this.actionCompletedStage = {...this.actionCompletedStage, doing: true}
 
             if(res.ok){
                 const newCourse = await res.json().then(data => data)
                 this.updateCourses(newCourse, 'add')
 
+                // Update the stage to "completed"
                 this.actionCompletedStage = {...this.actionCompletedStage, completed: true}
-                setTimeout(()=>{
-                    this.actionCompletedStage = {
-                        started: false,
-                        doing: false,
-                        completed: false
-                    }
-                }, 3000)       
+
+                // Reset the stage for subsequent requests we make
+                this.resetActionStage()     
             }else{
                 res.json().then(error => console.warn(error))
             }
@@ -217,16 +209,10 @@ export default({
 
             if(res.ok){
                 const newCourse = await res.json().then(data => data)
-                this.updateCourses(newCourse, 'edit')
 
+                this.updateCourses(newCourse, 'edit')
                 this.actionCompletedStage = {...this.actionCompletedStage, completed: true}
-                setTimeout(()=>{
-                    this.actionCompletedStage = {
-                        started: false,
-                        doing: false,
-                        completed: false
-                    }
-                }, 3000)
+                this.resetActionStage()
             }else{
                 res.json().then(error => console.warn(error))
             }
@@ -245,15 +231,8 @@ export default({
 
             if(res.ok){
                 this.updateCourses({id: courseId}, 'remove')
-
-                this.actionCompletedStage = {...this.actionCompletedStage, completed: true}
-                setTimeout(()=>{
-                    this.actionCompletedStage = {
-                        started: false,
-                        doing: false,
-                        completed: false
-                    }
-                }, 3000)
+                this.actionCompletedStage = {...this.actionCompletedStage, completed: true}     
+                this.resetActionStage()
             }else{
                 res.json().then(error => console.warn(error))
             }
@@ -316,6 +295,17 @@ export default({
 
         setActiveCourse(course){
             this.activeCourse = course
+        },
+
+        resetActionStage: function(){
+            // After completing an action such as creating, editing, or deleting a course
+            setTimeout(()=>{
+                    this.actionCompletedStage = {
+                        started: false,
+                        doing: false,
+                        completed: false
+                    }
+                }, 3000)
         }
     }
 })
